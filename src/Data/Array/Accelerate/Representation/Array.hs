@@ -97,7 +97,8 @@ arraysRpair a b = TupRunit `TupRpair` TupRsingle a `TupRpair` TupRsingle b
 -- | Creates a new, uninitialized Accelerate array.
 --
 allocateArray :: ArrayR (Array sh e) -> sh -> IO (Array sh e)
-allocateArray (ArrayR shR eR) sh = do
+allocateArray a@(ArrayR shR eR) sh = do
+  putStrLn ("allocateArray, repr: " ++ show a ++ ", shape: " ++ showShape shR sh)
   adata  <- newArrayData eR (size shR sh)
   return $! Array sh adata
 
